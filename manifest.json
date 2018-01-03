@@ -1,0 +1,18 @@
+{
+  "name": "service-dotnet-getting-started",
+  "vendor": "vtex",
+  "version": "0.1.0",
+  "title": "Getting Started with Service",
+  "description": "A hello world app using VTEX IO service",
+  "categories": [],
+  "settingsSchema": {},
+  "registries": [
+    "smartcheckout"
+  ],
+  "builders": {
+    "service-dotnet": "1.x"
+  },
+  "scripts": {
+    "postreleasy": "vtex publish"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "stack": "dotnet",
+  "memory": 64,
+  "runtimeArgs": [
+  ],
+  "routes": {
+    "printHelloWorld": {
+      "path": "/api/vtex/hello",
+      "public": true
+    },
+    "printHello": {
+      "path": "/api/vtex/hello/:name",
+      "public": true
+    },
+    "printPrivateValue": {
+      "path": "/api/vtex/private",
+      "public": false
+    }
+  },
+  "events": {
+    "onAppsLinked": {
+      "sender": "apps",
+      "keys": ["linked"]
+    }
+  }
+}
