@@ -19,4 +19,4 @@ $ vtex link
 
 Finally, access your endpoint at:
 
-http://service-getting-started.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/hello
+http://service-dotnet-getting-started.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/hello
