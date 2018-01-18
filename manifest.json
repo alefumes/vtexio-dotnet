@@ -10,7 +10,7 @@
     "smartcheckout"
   ],
   "builders": {
-    "service-dotnet": "1.x"
+    "service-dotnet": "0.x"
   },
   "scripts": {
     "postreleasy": "vtex publish"

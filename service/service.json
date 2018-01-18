@@ -1,6 +1,6 @@
 {
   "stack": "dotnet",
-  "memory": 64,
+  "memory": 4096,
   "runtimeArgs": [
   ],
   "routes": {
