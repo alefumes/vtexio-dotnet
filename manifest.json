@@ -1,16 +1,16 @@
 {
-  "name": "service-dotnet-getting-started",
+  "name": "dotnet-getting-started",
   "vendor": "vtex",
   "version": "0.1.0",
-  "title": "Getting Started with Service",
-  "description": "A hello world app using VTEX IO service",
+  "title": "Getting Started with .Net",
+  "description": "A hello world app using VTEX IO .Net Runtime",
   "categories": [],
   "settingsSchema": {},
   "registries": [
     "smartcheckout"
   ],
   "builders": {
-    "service-dotnet": "0.x"
+    "dotnet": "0.x"
   },
   "scripts": {
     "postreleasy": "vtex publish"
