@@ -15,6 +15,14 @@
     "printPrivateValue": {
       "path": "/api/vtex/private",
       "public": false
+    },
+    "apiDefault": {
+      "path": "/api/*url",
+      "public": true
+    },
+    "default": {
+      "path": "/*url",
+      "public": true
     }
   },
   "events": {
