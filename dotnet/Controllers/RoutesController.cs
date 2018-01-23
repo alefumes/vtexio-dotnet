@@ -21,5 +21,15 @@ namespace service.Controllers
         {
             return $"My private value! Account: {account} | Workspace: {workspace}";
         }
+
+        public string ApiDefault()
+        {
+            return "This is the default API response";
+        }
+
+        public string Default()
+        {
+            return "This is the default response";
+        }
     }
 }
