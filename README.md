@@ -50,7 +50,7 @@ Your application details (name, version and description, for instance) must be s
 ```json
 {
   "name": "Calk",
-  "vendor": "MyCompany",
+  "vendor": "mycompany",
   "version": "1.3.18",
   "title": "Smart Scientific Calculator",
   "description": "A smart scientific calculator API with financial tools",
@@ -143,4 +143,37 @@ In the example below you have a catch-all route that handles all requests that s
   }
 }
 ...
+```
+
+### Outgoing Requests
+
+If you want to send outgoing requests you need to specify the domains in the `outbound-access` policy in your `manifest.json` file.
+
+```json
+"policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "bnb.data.bl.uk"
+      }
+    }
+  ]
+```
+
+You also need to send an authorization token in the `Proxy-Authorization` header.
+
+```C#
+string authToken = HttpContext.Request.Headers["X-Vtex-Credential"];
+            
+var request = new HttpRequestMessage
+{
+    Method = HttpMethod.Get,  
+    RequestUri = new Uri("http://bnb.data.bl.uk")
+};
+
+request.Headers.Add("Proxy-Authorization", authToken);
+
+var client = new System.Net.Http.HttpClient();
+var response = await client.SendAsync(request);
+return await response.Content.ReadAsStringAsync();
 ```
