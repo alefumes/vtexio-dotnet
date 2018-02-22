@@ -145,9 +145,9 @@ In the example below you have a catch-all route that handles all requests that s
 ...
 ```
 
-### Outgoing Requests
+### Outbound Requests
 
-If you want to send outgoing requests you need to specify the domains in the `outbound-access` policy in your `manifest.json` file.
+If you want to send outbound requests you need to specify the domains in the `outbound-access` policy in your `manifest.json` file.
 
 ```json
 "policies": [
