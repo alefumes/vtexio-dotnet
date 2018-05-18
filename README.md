@@ -94,6 +94,8 @@ public class RoutesController : Controller
 }
 ```
 
+If you need advanced application configuration, you can use the `StartupExtender` class to configure the services you need and change the request pipeline.
+
 ## Routing
 
 When you define a route you need to specify if it's _public_ or _private_.
