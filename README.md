@@ -13,6 +13,12 @@ $ npm i -g vtex
 $ vtex login
 ```
 
+Secondly, install the **NPM Cache** to be able to use external dependencies (from **NuGet**).
+
+```bash
+$ vtex infra install npm-cache
+```
+
 Download this repo and open a terminal in its folder.
 
 To start coding you need a workspace (it's like a `git` branch of your store). Let's create a workspace named `dev`:
@@ -169,7 +175,7 @@ string authToken = HttpContext.Request.Headers["X-Vtex-Credential"];
             
 var request = new HttpRequestMessage
 {
-    Method = HttpMethod.Get,  
+    Method = HttpMethod.Get,
     RequestUri = new Uri("http://bnb.data.bl.uk")
 };
 
@@ -179,3 +185,32 @@ var client = new System.Net.Http.HttpClient();
 var response = await client.SendAsync(request);
 return await response.Content.ReadAsStringAsync();
 ```
+
+If your outbound request uses the **HTTPS** protocol or a specific **port** you need to follow some extra steps:
+1. Set the request URL to use `http` schema
+2. Remove the port number from the URL (if any)
+3. Add the `X-Vtex-Proxy-To` header with the actual URL you want. You don't need to include the _path_ here, just _schema_, _domain_ and _port_.
+
+Consider you want to send a request to the following URL:
+
+`https://my-service.com:8090/api/foo`
+
+If you follow the steps above you will have something like this:
+
+```C#
+string authToken = HttpContext.Request.Headers["X-Vtex-Credential"];
+            
+var request = new HttpRequestMessage
+{
+    Method = HttpMethod.Get,
+    RequestUri = new Uri("http://my-service.com/api/foo")
+};
+
+request.Headers.Add("Proxy-Authorization", authToken);
+request.Headers.Add("X-Vtex-Proxy-To", "https://my-service.com:8090");
+
+var client = new System.Net.Http.HttpClient();
+var response = await client.SendAsync(request);
+return await response.Content.ReadAsStringAsync();
+```
+
