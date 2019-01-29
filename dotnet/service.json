@@ -5,19 +5,19 @@
   ],
   "routes": {
     "printHelloWorld": {
-      "path": "/api/vtex/hello",
+      "path": "/_v/vtex/hello",
       "public": true
     },
     "printHello": {
-      "path": "/api/vtex/hello/:name",
+      "path": "/_v/vtex/hello/:name",
       "public": true
     },
     "printPrivateValue": {
-      "path": "/api/vtex/private",
+      "path": "/_v/vtex/private",
       "public": false
     },
     "apiDefault": {
-      "path": "/api/*url",
+      "path": "/_v/*url",
       "public": true
     },
     "default": {
