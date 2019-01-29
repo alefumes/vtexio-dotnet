@@ -35,7 +35,7 @@ $ vtex link
 
 Finally, access your public endpoint at:
 
-`https://{{workspace}}--{{account}}.myvtex.com/api/vtex/hello`
+`https://{{workspace}}--{{account}}.myvtex.com/_v/vtex/hello`
 
 You can also access private endpoints, but you need to send your token in the `Authorization` header.
 
@@ -47,7 +47,7 @@ $ vtex local token
 
 Now that you already have a token you can call your private endpoint:
 
-`http://dotnet-getting-started.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/api/vtex/private`
+`http://dotnet-getting-started.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/_v/vtex/private`
 
 ## Setting up my application
 
@@ -114,6 +114,8 @@ A private route needs an authorization token (that should be sent in the `Author
 
 `http://{{appName}}.{{vendor}}.{{region}}.vtex.io/{{account}}/{{workspace}}/{{yourPath}}`
 
+**Important:** Note that you can't declare routes that start with `/api`. This is a reserved path segment.
+
 ### Named Parameters
 
 You can define named path parameters for your routes by adding a `:` before its names. The following example shows a route with a `code` parameter.
@@ -122,7 +124,7 @@ You can define named path parameters for your routes by adding a `:` before its 
 ...
 "routes": {
   "cars": {
-    "path": "/api/cars/:code",
+    "path": "/_v/cars/:code",
     "public": true
   }
 }
@@ -135,14 +137,14 @@ The router will compare the route patterns in the order they are defined, so you
 
 If you need to define catch-all routes to handle requests that can't match your specific routes, you can do it by using an `*` before the name of the parameter.
 
-In the example below you have a catch-all route that handles all requests that start with `/api` (`apiDefault`) and a more generic one to handle any request that couldn't match any previous pattern (`default`).
+In the example below you have a catch-all route that handles all requests that start with `/_v` (`apiDefault`) and a more generic one to handle any request that couldn't match any previous pattern (`default`).
 
 ```json
 ...
 "routes": {
   ...
   "apiDefault": {
-    "path": "/api/*url",
+    "path": "/_v/*url",
      "public": true
   },
   "default": {
@@ -172,7 +174,7 @@ You also need to send an authorization token in the `Proxy-Authorization` header
 
 ```C#
 string authToken = HttpContext.Request.Headers["X-Vtex-Credential"];
-            
+
 var request = new HttpRequestMessage
 {
     Method = HttpMethod.Get,
@@ -189,21 +191,22 @@ return await response.Content.ReadAsStringAsync();
 If your outbound request uses the **HTTPS** protocol or a specific **port** you need to follow some extra steps:
 1. Set the request URL to use `http` schema
 2. Remove the port number from the URL (if any)
-3. Add the `X-Vtex-Proxy-To` header with the actual URL you want. You don't need to include the _path_ here, just _schema_, _domain_ and _port_.
+3. If you need to explicitly define the port number, add the `X-Vtex-Proxy-To` header with the actual URL you want. You don't need to include the _path_ here, just _schema_, _domain_ and _port_.
+4. In case you don't need the port number, just add the `X-Vtex-Use-Https` header with value `true`.
 
 Consider you want to send a request to the following URL:
 
-`https://my-service.com:8090/api/foo`
+`https://my-service.com:8090/_v/foo`
 
 If you follow the steps above you will have something like this:
 
 ```C#
 string authToken = HttpContext.Request.Headers["X-Vtex-Credential"];
-            
+
 var request = new HttpRequestMessage
 {
     Method = HttpMethod.Get,
-    RequestUri = new Uri("http://my-service.com/api/foo")
+    RequestUri = new Uri("http://my-service.com/_v/foo")
 };
 
 request.Headers.Add("Proxy-Authorization", authToken);
@@ -212,5 +215,12 @@ request.Headers.Add("X-Vtex-Proxy-To", "https://my-service.com:8090");
 var client = new System.Net.Http.HttpClient();
 var response = await client.SendAsync(request);
 return await response.Content.ReadAsStringAsync();
+```
+
+Without the port number, the request to `https://my-service.com/_v/foo` would be the same with a different header.
+
+```C#
+request.Headers.Add("Proxy-Authorization", authToken);
+request.Headers.Add("X-Vtex-Use-Https", "true");
 ```
 
