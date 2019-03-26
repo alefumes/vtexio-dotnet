@@ -14,5 +14,10 @@
   },
   "scripts": {
     "postreleasy": "vtex publish"
-  }
+  },
+  "policies": [
+    {
+      "name": "colossus-write-logs"
+    }
+  ]
 }
