@@ -1,10 +1,12 @@
 using service.dataSources.authors;
 using service.dataSources.books;
 using Microsoft.AspNetCore.Http;
+using GraphQL;
 
 namespace service.graphql
 {
-    public partial class Query : IGraphQLOperation
+    [GraphQLMetadata("Query")]
+    public partial class Query
     {
         private readonly IBooksDataSource booksDataSource;
         private readonly IAuthorsDataSource authorsDataSource;

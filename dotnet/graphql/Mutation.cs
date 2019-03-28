@@ -13,7 +13,8 @@ using service.Utils;
 
 namespace service.graphql
 {
-    public class Mutation : IGraphQLOperation
+    [GraphQLMetadata("Mutation")]
+    public class Mutation
     {
         private readonly IBooksDataSource booksDataSource;
         public Mutation(IBooksDataSource booksDataSource)
