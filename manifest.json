@@ -10,14 +10,10 @@
     "smartcheckout"
   ],
   "builders": {
+    "graphql": "1.x",
     "dotnet": "0.x"
   },
   "scripts": {
     "postreleasy": "vtex publish"
-  },
-  "policies": [
-    {
-      "name": "colossus-write-logs"
-    }
-  ]
+  }
 }
