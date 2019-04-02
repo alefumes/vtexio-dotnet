@@ -4,10 +4,6 @@
   "runtimeArgs": [
   ],
   "routes": {
-    "__graphql": {
-      "path": "/_v/graphql",
-      "public": false
-    },
     "printHelloWorld": {
       "path": "/_v/vtex/hello",
       "public": true
