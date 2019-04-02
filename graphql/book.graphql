@@ -1,0 +1,13 @@
+type Book {
+  id: ID!
+  cacheId: ID!
+  name: String!
+  author: Author
+}
+
+# It is necessary to generate input types for creating books
+# ref: http://graphql.org/graphql-js/mutations-and-input-types/
+input BookInput {
+  name: String!
+  author: AuthorInput!
+}
