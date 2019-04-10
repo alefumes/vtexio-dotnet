@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace service.Controllers
+namespace GettingStarted.Controllers
 {
     public class EventsController : Controller
     {

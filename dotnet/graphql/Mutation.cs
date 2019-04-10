@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GraphQL;
 using GraphQL.Types;
-using service.dataSources.books;
-using service.Model;
+using GettingStarted.DataSources.Books;
+using GettingStarted.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
-using service.Utils;
+using GettingStarted.Utils;
 
-namespace service.graphql
+namespace GettingStarted.GraphQL
 {
     [GraphQLMetadata("Mutation")]
     public class Mutation
@@ -43,14 +43,8 @@ namespace service.graphql
         }
 
         [GraphQLMetadata("newBook")]
-        public Book NewBook(ResolveFieldContext context, IOContext ioContext, Book book)
+        public Book NewBook(ResolveFieldContext context, Book book)
         {
-            if (ioContext != null && ioContext.HttpContext != null)
-            {
-                string headers = $"account: {ioContext.Account}\nworkspace: {ioContext.Workspace}";
-                Console.WriteLine(headers);
-            }
-
             if (book == null)
             {
                 return null;

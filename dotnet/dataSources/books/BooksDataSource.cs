@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
-using service.Model;
+using System.Linq;
+using GettingStarted.Model;
 
-namespace service.dataSources.books
+namespace GettingStarted.DataSources.Books
 {
     public class BooksDataSource : IBooksDataSource
     {
@@ -23,6 +25,54 @@ namespace service.dataSources.books
         public List<Book> GetBooks()
         {
             return books;
+        }
+
+        public Book GetBook(int id)
+        {
+            return books.Where(b => b.Id == id).FirstOrDefault();
+        }
+
+        public Book NewBook(Book book)
+        {
+            if (book == null)
+            {
+                return null;
+            }
+
+            book.Id = GetNewId();
+            books.Add(book);
+            return book;
+        }
+
+        public Book EditBook(Book book)
+        {
+            if (book == null)
+            {
+                return null;
+            }
+
+            var existingBook = books.Where(b => b.Id == book.Id).SingleOrDefault();
+            if (existingBook == null)
+            {
+                return null;
+            }
+
+            existingBook.Name = book.Name;
+            existingBook.AuthorId = book.AuthorId;
+
+            return existingBook;
+        }
+
+        public bool DeleteBook(int id)
+        {
+            var count = books.RemoveAll(b => b.Id == id);
+            return count > 0;
+        }
+
+        private int GetNewId()
+        {
+            var lastBook = books.LastOrDefault();
+            return lastBook != null ? lastBook.Id++ : 1;
         }
     }
 }

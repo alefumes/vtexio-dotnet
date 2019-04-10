@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using service.dataSources.authors;
-using service.dataSources.books;
+using GettingStarted.DataSources.Authors;
+using GettingStarted.DataSources.Books;
 
 namespace Vtex
 {

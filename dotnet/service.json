@@ -7,22 +7,6 @@
     "printHelloWorld": {
       "path": "/_v/vtex/hello",
       "public": true
-    },
-    "printHello": {
-      "path": "/_v/vtex/hello/:name",
-      "public": true
-    },
-    "printPrivateValue": {
-      "path": "/_v/vtex/private",
-      "public": false
-    },
-    "apiDefault": {
-      "path": "/_v/*url",
-      "public": true
-    },
-    "default": {
-      "path": "/*url",
-      "public": true
     }
   },
   "events": {

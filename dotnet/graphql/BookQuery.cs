@@ -3,52 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphQL;
 using GraphQL.Types;
-using service.dataSources.books;
-using service.Model;
+using GettingStarted.DataSources.Books;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using GettingStarted.GraphQL.Types;
+using GettingStarted.Mappers;
 
-namespace service.graphql
+namespace GettingStarted.GraphQL
 {
     public partial class Query
     {
         [GraphQLMetadata("books")]
-        public List<Book> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
-            if (context != null)
-                Console.WriteLine(context.HttpContext.Request.Path);
-
-            return booksDataSource.GetBooks();
+            return booksDataSource.GetBooks()
+            .Select(b => ConvertToGraphQLBook(b));
         }
 
         [GraphQLMetadata("book")]
-        public service.dto.Book GetBook(ResolveFieldContext context, int id)
+        public Book GetBook(ResolveFieldContext context, int id)
         {
-            var book = booksDataSource.GetBooks().Where(b => b.Id == id).SingleOrDefault();
+            var book = booksDataSource.GetBook(id);
             if (book == null)
                 return null;
 
-            var result = new service.dto.Book()
-            {
-                Id = book.Id,
-                Name = book.Name
-            };
-
-            if (context.SubFields.ContainsKey("author"))
-            {
-                var author = authorsDataSource.GetAuthors().Where(a => a.Id == book.AuthorId).SingleOrDefault();
-                if (author != null)
-                {
-                    result.Author = new service.dto.Author()
-                    {
-                        Id = author.Id,
-                        Name = author.Name,
-                        Email = author.Email
-                    };
-                }
-            }
-
-            return result;
+            return ConvertToGraphQLBook(book, ShouldIncludeAuthor(context));
         }
 
         [GraphQLMetadata("booksCount")]
@@ -68,5 +47,13 @@ namespace service.graphql
 
             return JsonConvert.SerializeObject(book);
         }
+
+        private Book ConvertToGraphQLBook(Model.Book modelBook, bool includeAuthor = false)
+        {
+            var modelAuthor = includeAuthor ? authorsDataSource.GetAuthor(modelBook.AuthorId) : null;
+            return BookMapper.ConvertModelBookToGraphQLBook(modelBook, modelAuthor);
+        }
+
+        private bool ShouldIncludeAuthor(ResolveFieldContext context) => context.SubFields.ContainsKey("author");
     }
 }

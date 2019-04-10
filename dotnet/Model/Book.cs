@@ -1,18 +1,12 @@
 using System.Collections.Generic;
 
-namespace service.Model
+namespace GettingStarted.Model
 {
     public class Book
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int AuthorId { get; set; }
-
-        //GraphQL needs empty constructors to instantiate the objects
-        public Book()
-        {
-
-        }
 
         public Book(int id, string name, int authorId)
         {

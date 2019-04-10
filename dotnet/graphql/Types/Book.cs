@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace service.dto
+namespace GettingStarted.GraphQL.Types
 {
     public class Book
     {

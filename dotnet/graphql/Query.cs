@@ -1,9 +1,9 @@
-using service.dataSources.authors;
-using service.dataSources.books;
+using GettingStarted.DataSources.Authors;
+using GettingStarted.DataSources.Books;
 using Microsoft.AspNetCore.Http;
 using GraphQL;
 
-namespace service.graphql
+namespace GettingStarted.GraphQL
 {
     [GraphQLMetadata("Query")]
     public partial class Query

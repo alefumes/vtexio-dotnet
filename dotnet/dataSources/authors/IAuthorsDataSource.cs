@@ -1,10 +1,14 @@
 using System.Collections.Generic;
-using service.Model;
+using GettingStarted.Model;
 
-namespace service.dataSources.authors
+namespace GettingStarted.DataSources.Authors
 {
     public interface IAuthorsDataSource
     {
         List<Author> GetAuthors();
+        Author GetAuthor(int id);
+        Author NewAuthor(Author author);
+        Author EditAuthor(Author author);
+        bool DeleteAuthor(int id);
     }
 }

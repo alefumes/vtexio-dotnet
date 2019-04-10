@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using GraphQL;
 using GraphQL.Types;
-using service.dataSources.authors;
-using service.Model;
+using GettingStarted.DataSources.Authors;
+using GettingStarted.Model;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace service.graphql
+namespace GettingStarted.GraphQL
 {
     public partial class Query
     {
@@ -22,13 +22,13 @@ namespace service.graphql
         }
 
         [GraphQLMetadata("author")]
-        public service.dto.Author GetAuthor(ResolveFieldContext context, int id)
+        public GettingStarted.GraphQL.Types.Author GetAuthor(ResolveFieldContext context, int id)
         {
             var author = authorsDataSource.GetAuthors().Where(b => b.Id == id).SingleOrDefault();
             if (author == null)
                 return null;
 
-            var result = new service.dto.Author()
+            var result = new GettingStarted.GraphQL.Types.Author()
             {
                 Id = author.Id,
                 Name = author.Name,
@@ -37,12 +37,12 @@ namespace service.graphql
 
             if (context.SubFields.ContainsKey("books"))
             {
-                result.Books = new List<service.dto.Book>();
+                result.Books = new List<GettingStarted.GraphQL.Types.Book>();
 
                 var books = booksDataSource.GetBooks().Where(b => b.AuthorId == id);
                 foreach(var book in books)
                 {
-                    result.Books.Add(new service.dto.Book() { Id = book.Id, Name = book.Name, Author = result });
+                    result.Books.Add(new GettingStarted.GraphQL.Types.Book() { Id = book.Id, Name = book.Name, Author = result });
                 }
             }
 
