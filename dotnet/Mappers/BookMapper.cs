@@ -23,7 +23,21 @@ namespace GettingStarted.Mappers
         public static Model.Book ConvertGraphQLBookToModelBook(Book graphqlBook)
         {
             int authorId = graphqlBook.Author?.Id ?? -1;
-            return new Model.Book(graphqlBook.Id, graphqlBook.Name, authorId);
+            return new Model.Book 
+            {
+                Id = graphqlBook.Id, 
+                Name = graphqlBook.Name, 
+                AuthorId = authorId
+            };
+        }
+
+        public static Model.Book ConvertBookInputToModelBook(BookInput bookInput)
+        {
+            return new Model.Book 
+            {
+                Name = bookInput.Name, 
+                AuthorId = bookInput.AuthorId
+            };
         }
     }
 }

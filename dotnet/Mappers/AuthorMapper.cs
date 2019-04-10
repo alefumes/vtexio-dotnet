@@ -28,7 +28,21 @@ namespace GettingStarted.Mappers
 
         public static Model.Author ConvertGraphQLAuthorToModelAuthor(Author graphqlAuthor)
         {
-            return new Model.Author(graphqlAuthor.Id, graphqlAuthor.Name, graphqlAuthor.Email);
+            return new Model.Author()
+            {
+                Id = graphqlAuthor.Id, 
+                Name = graphqlAuthor.Name,
+                Email = graphqlAuthor.Email
+            };
+        }
+
+        public static Model.Author ConvertAuthorInputToModelAuthor(AuthorInput authorInput)
+        {
+            return new Model.Author()
+            {
+                Name = authorInput.Name,
+                Email = authorInput.Email
+            };
         }
     }
 }
