@@ -12,13 +12,13 @@ namespace GettingStarted.DataSources.Books
         {
             books = new List<Book>()
             {
-                new Book(1, "Harry Potter", 1),
-                new Book(2, "Lord of the Rings: The Fellowship of the Ring", 2),
-                new Book(3, "Lord of the Rings: The Two Towers", 2),
-                new Book(4, "Lord of the Rings: The Return of the King", 2),
-                new Book(5, "Song of Ice and Fire", 3),
-                new Book(6, "Saxon Tales", 4),
-                new Book(7, "Genghis Khan", 5),
+                new Book { Id = 1, Name = "Harry Potter", AuthorId = 1 },
+                new Book { Id = 2, Name = "Lord of the Rings: The Fellowship of the Ring", AuthorId = 2 },
+                new Book { Id = 3, Name = "Lord of the Rings: The Two Towers", AuthorId = 2 },
+                new Book { Id = 4, Name = "Lord of the Rings: The Return of the King", AuthorId = 2 },
+                new Book { Id = 5, Name = "Song of Ice and Fire", AuthorId = 3 },
+                new Book { Id = 6, Name = "Saxon Tales", AuthorId = 4 },
+                new Book { Id = 7, Name = "Genghis Khan", AuthorId = 5 },
             };
         }
 

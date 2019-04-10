@@ -11,11 +11,11 @@ namespace GettingStarted.DataSources.Authors
         {
             authors = new List<Author>()
             {
-                new Author(1, "JK Rowling", "rowling@gmail.com" ),
-                new Author(2, "Tolkien", "tolkien@gmail.com"),
-                new Author(3, "Martin", "martin@gmail.com"),
-                new Author(4, "Bernard Cornwell", "cornwell@gmail.com"),
-                new Author(5, "Conn Iggulden", "iggulden@gmail.com"),
+                new Author { Id = 1, Name = "JK Rowling", Email = "rowling@gmail.com" },
+                new Author { Id = 2, Name = "Tolkien", Email = "tolkien@gmail.com" },
+                new Author { Id = 3, Name = "Martin", Email = "martin@gmail.com" },
+                new Author { Id = 4, Name = "Bernard Cornwell", Email = "cornwell@gmail.com" },
+                new Author { Id = 5, Name = "Conn Iggulden", Email = "iggulden@gmail.com" },
             };
         }
 
