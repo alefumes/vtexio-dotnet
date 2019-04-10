@@ -14,10 +14,10 @@ namespace GettingStarted.GraphQL
     public partial class Query
     {
         [GraphQLMetadata("books")]
-        public IEnumerable<Book> GetBooks()
+        public IEnumerable<Book> GetBooks(ResolveFieldContext context)
         {
             return booksDataSource.GetBooks()
-            .Select(b => ConvertToGraphQLBook(b));
+            .Select(b => ConvertToGraphQLBook(b, ShouldIncludeAuthor(context)));
         }
 
         [GraphQLMetadata("book")]
@@ -54,6 +54,6 @@ namespace GettingStarted.GraphQL
             return BookMapper.ConvertModelBookToGraphQLBook(modelBook, modelAuthor);
         }
 
-        private bool ShouldIncludeAuthor(ResolveFieldContext context) => context.SubFields.ContainsKey("author");
+        private bool ShouldIncludeAuthor(ResolveFieldContext context) => context.SubFields?.ContainsKey("author") ?? false;
     }
 }

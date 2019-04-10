@@ -74,5 +74,10 @@ namespace GettingStarted.DataSources.Books
             var lastBook = books.LastOrDefault();
             return lastBook != null ? lastBook.Id++ : 1;
         }
+
+        public List<Book> GetBooksByAuthor(int authorId)
+        {
+            return books.Where(b => b.AuthorId == authorId).ToList();
+        }
     }
 }

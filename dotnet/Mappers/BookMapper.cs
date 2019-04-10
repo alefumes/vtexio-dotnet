@@ -1,5 +1,4 @@
 using GettingStarted.GraphQL.Types;
-using Model = GettingStarted.Model;
 
 namespace GettingStarted.Mappers
 {
@@ -15,12 +14,7 @@ namespace GettingStarted.Mappers
 
             if (modelAuthor != null)
             {
-                graphqlBook.Author = new Author()
-                {
-                    Id = modelAuthor.Id,
-                    Name = modelAuthor.Name,
-                    Email = modelAuthor.Email
-                };
+                graphqlBook.Author = AuthorMapper.ConvertModelAuthorToGraphQLAuthor(modelAuthor, null);
             }
 
             return graphqlBook;

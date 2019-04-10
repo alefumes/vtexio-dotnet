@@ -10,5 +10,6 @@ namespace GettingStarted.DataSources.Books
         Book NewBook(Book book);
         Book EditBook(Book book);
         bool DeleteBook(int id);
+        List<Book> GetBooksByAuthor(int authorId);
     }
 }
