@@ -25,8 +25,10 @@ namespace GettingStarted.GraphQL
         {
             var author = authorsDataSource.GetAuthor(id);
             if (author == null)
+            {
                 return null;
-
+            }
+            
             return ConvertToGraphQLAuthor(author, ShouldIncludeBooks(context));
         }
 

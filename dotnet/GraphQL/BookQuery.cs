@@ -25,7 +25,9 @@ namespace GettingStarted.GraphQL
         {
             var book = booksDataSource.GetBook(id);
             if (book == null)
+            {
                 return null;
+            }
 
             return ConvertToGraphQLBook(book, ShouldIncludeAuthor(context));
         }
