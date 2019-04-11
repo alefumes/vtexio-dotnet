@@ -68,8 +68,8 @@ namespace GettingStarted.DataSources.Authors
 
         private int GetNewId()
         {
-            var lastAuthor = authors.LastOrDefault();
-            return lastAuthor != null ? lastAuthor.Id++ : 1;
+            var lastAuthor = authors.OrderBy(a => a.Id).LastOrDefault();
+            return lastAuthor != null ? lastAuthor.Id + 1 : 1;
         }
     }
 }

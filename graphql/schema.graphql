@@ -17,7 +17,7 @@ type Mutation {
   newBook(book: BookInput!): Book
   deleteBook(id: ID): Boolean
 
-  # editAuthor(id: ID!, book: AuthorInput!): Author
-  # newAuthor(book: AuthorInput!): Author
-  # deleteAuthor(id: ID): Boolean
+  editAuthor(id: ID!, author: AuthorInput!): Author
+  newAuthor(author: AuthorInput!): Author
+  deleteAuthor(id: ID): Boolean
 }

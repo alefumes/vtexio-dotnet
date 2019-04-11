@@ -71,8 +71,8 @@ namespace GettingStarted.DataSources.Books
 
         private int GetNewId()
         {
-            var lastBook = books.LastOrDefault();
-            return lastBook != null ? lastBook.Id++ : 1;
+            var lastBook = books.OrderBy(b => b.Id).LastOrDefault();
+            return lastBook != null ? lastBook.Id + 1 : 1;
         }
 
         public List<Book> GetBooksByAuthor(int authorId)

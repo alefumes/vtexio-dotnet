@@ -17,39 +17,39 @@ namespace GettingStarted.GraphQL
     public partial class Mutation
     {
         [GraphQLMetadata("editBook")]
-        public Book EditBook(int id, BookInput bookInput)
+        public Book EditBook(int id, BookInput book)
         {
-            if (bookInput == null)
+            if (book == null)
             {
                 return null;
             }
-            
+
             var existingBook = booksDataSource.GetBook(id);
             if (existingBook == null)
             {
                 return null;
             }
-            
-            existingBook.Name = bookInput.Name;
-            existingBook.AuthorId = bookInput.AuthorId;
 
-            var author = authorsDataSource.GetAuthor(bookInput.AuthorId);
+            existingBook.Name = book.Name;
+            existingBook.AuthorId = book.AuthorId;
+
+            var author = authorsDataSource.GetAuthor(book.AuthorId);
 
             return BookMapper.ConvertModelBookToGraphQLBook(existingBook, author);
         }
 
         [GraphQLMetadata("newBook")]
-        public Book NewBook(ResolveFieldContext context, BookInput bookInput)
+        public Book NewBook(ResolveFieldContext context, BookInput book)
         {
-            if (bookInput == null)
+            if (book == null)
             {
                 return null;
             }
 
-            var book = BookMapper.ConvertBookInputToModelBook(bookInput);
-            book = booksDataSource.NewBook(book);
-            
-            return BookMapper.ConvertModelBookToGraphQLBook(book, null);
+            var newBook = BookMapper.ConvertBookInputToModelBook(book);
+            newBook = booksDataSource.NewBook(newBook);
+
+            return BookMapper.ConvertModelBookToGraphQLBook(newBook, null);
         }
 
         [GraphQLMetadata("deleteBook")]

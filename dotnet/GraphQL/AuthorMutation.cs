@@ -17,9 +17,9 @@ namespace GettingStarted.GraphQL
     public partial class Mutation
     {
         [GraphQLMetadata("editAuthor")]
-        public Author EditAuthor(int id, AuthorInput authorInput)
+        public Author EditAuthor(int id, AuthorInput author)
         {
-            if (authorInput == null)
+            if (author == null)
             {
                 return null;
             }
@@ -30,26 +30,26 @@ namespace GettingStarted.GraphQL
                 return null;
             }
 
-            existingAuthor.Name = authorInput.Name;
-            existingAuthor.Email = authorInput.Email;
+            existingAuthor.Name = author.Name;
+            existingAuthor.Email = author.Email;
 
             var books = booksDataSource.GetBooksByAuthor(id);
-            
+
             return AuthorMapper.ConvertModelAuthorToGraphQLAuthor(existingAuthor, books);
         }
 
         [GraphQLMetadata("newAuthor")]
-        public Author NewAuthor(ResolveFieldContext context, AuthorInput authorInput)
+        public Author NewAuthor(ResolveFieldContext context, AuthorInput author)
         {
-            if (authorInput == null)
+            if (author == null)
             {
                 return null;
             }
 
-            var author = AuthorMapper.ConvertAuthorInputToModelAuthor(authorInput);
-            author = authorsDataSource.NewAuthor(author);
-            
-            return AuthorMapper.ConvertModelAuthorToGraphQLAuthor(author, null);
+            var newAuthor = AuthorMapper.ConvertAuthorInputToModelAuthor(author);
+            newAuthor = authorsDataSource.NewAuthor(newAuthor);
+
+            return AuthorMapper.ConvertModelAuthorToGraphQLAuthor(newAuthor, null);
         }
 
         [GraphQLMetadata("deleteAuthor")]
