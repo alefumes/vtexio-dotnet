@@ -10,10 +10,10 @@ namespace GettingStarted.GraphQL
     {
         private readonly IBooksDataSource booksDataSource;
         private readonly IAuthorsDataSource authorsDataSource;
-        private readonly IHttpContextAccessor context;
-        public Query(IBooksDataSource booksDataSource, IAuthorsDataSource authorsDataSource, IHttpContextAccessor context)
+        private readonly IHttpContextAccessor contextAccessor;
+        public Query(IBooksDataSource booksDataSource, IAuthorsDataSource authorsDataSource, IHttpContextAccessor contextAccessor)
         {
-            this.context = context;
+            this.contextAccessor = contextAccessor;
             this.authorsDataSource = authorsDataSource;
             this.booksDataSource = booksDataSource;
         }
