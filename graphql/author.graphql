@@ -6,7 +6,7 @@ type Author {
   books: [Book]
 }
 
-input AuthorInput {
-  name: String!
-  email: String!
-}
+# input AuthorInput {
+#   name: String!
+#   email: String!
+# }

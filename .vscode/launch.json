@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/dotnet-wrapper/bin/Debug/netcoreapp2.0/runner.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/dotnet-wrapper",
+            "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
