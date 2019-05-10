@@ -1,11 +1,11 @@
 type Query {
   # Cache control can only be set at root fields
-  books(from: Int = 0, to: Int = 4): [Book] @cacheControl(scope: PUBLIC, maxAge: SHORT)
+  books: [Book] @cacheControl(scope: PUBLIC, maxAge: SHORT)
   book(id: ID!): Book
   # booksCount: Int
   # bookSource(id: ID!): String
 
-  authors(from: Int = 0, to: Int = 4): [Author] @cacheControl(scope: PUBLIC, maxAge: SHORT)
+  authors: [Author] @cacheControl(scope: PUBLIC, maxAge: SHORT)
   author(id: ID!): Author
   # authorsCount: Int
   # authorSource(id: ID!): String
