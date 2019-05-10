@@ -1,10 +1,18 @@
 using System.Collections.Generic;
+using GettingStarted.Model;
+using GraphQL;
+using GraphQL.Types;
 
 namespace GettingStarted.GraphQL.Types
 {
-    public class AuthorInput
+    [GraphQLMetadata("AuthorInputType")]
+    public class AuthorInputType : InputObjectGraphType<Author>
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public AuthorInputType()
+        {
+            Name = "AuthorInput";
+            Field(x => x.Name);
+            Field(x => x.Email);
+        }
     }
 }

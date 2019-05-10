@@ -5,9 +5,9 @@ type Book {
   author: Author
 }
 
-# # It is necessary to generate input types for creating books
-# # ref: http://graphql.org/graphql-js/mutations-and-input-types/
-# input BookInput {
-#   name: String!
-#   authorId: ID!
-# }
+# It is necessary to generate input types for creating books
+# ref: http://graphql.org/graphql-js/mutations-and-input-types/
+input BookInput {
+  name: String!
+  authorId: ID!
+}
