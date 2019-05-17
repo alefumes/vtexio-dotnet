@@ -1,0 +1,19 @@
+{
+  "name": "dotnet-graphql-react",
+  "vendor": "vtex",
+  "version": "0.0.1",
+  "title": "Getting Started with .Net",
+  "description": "A hello world app using VTEX IO .Net Runtime",
+  "scripts": {
+    "prereleasy": "bash pre.sh"
+  },
+  "builders": {
+    "pages": "1.x",
+    "react": "3.x",
+    "dotnet": "0.x",
+    "graphql": "1.x"
+  },
+  "dependencies": {
+    "vtex.styleguide": "9.x"
+  }
+}
