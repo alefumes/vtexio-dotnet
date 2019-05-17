@@ -1,0 +1,12 @@
+type Author {
+  id: ID!
+  cacheId: ID!
+  name: String!
+  email: String!
+  books: [Book]
+}
+
+input AuthorInput {
+  name: String!
+  email: String!
+}
