@@ -237,6 +237,7 @@ There are 2 approaches for writting GraphQL applications.
 4. Create your *mutation* class and decorate it with `[GraphQLMetadata("Mutation")]`.
 5. Implement your resolvers the same way you did in step 3.
 
+Example:
 ```C#
 [GraphQLMetadata("Query")]
 public class Query
@@ -262,6 +263,7 @@ public class Query
 4. Create your *mutation* class and decorate it with `[GraphQLMetadata("Mutation")]`.
 5. Implement your resolvers the same way you did in step 3.
 
+Example:
 ```C#
 [GraphQLMetadata("Query")]
 public class Query : ObjectGraphType<object>
@@ -280,4 +282,4 @@ public class Query : ObjectGraphType<object>
 
 **Tip:** You can only have one class for operation type (Query, Mutation or Subscription). If you want to separate your code by entity or responsibility you can do it with `partial` classes.
 
-**Tip:** If need to access the `HttpContext` in your resolvers you can inject the `IHttpContextAccessor` in your class constructor.
+**Tip:** If you need to access the `HttpContext` in your resolvers you can inject the `IHttpContextAccessor` in your class constructor.
