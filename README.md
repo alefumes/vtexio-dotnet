@@ -19,7 +19,7 @@ Secondly, install the **NPM Cache** to be able to use external dependencies (fro
 $ vtex infra install npm-cache
 ```
 
-Download this repo and open a terminal in its folder.
+Download this repo and open a terminal in the `rest-api` folder.
 
 To start coding you need a workspace (it's like a `git` branch of your store). Let's create a workspace named `dev`:
 
@@ -47,7 +47,7 @@ $ vtex local token
 
 Now that you already have a token you can call your private endpoint:
 
-`http://dotnet-getting-started.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/_v/vtex/private`
+`http://dotnet-rest-api.vtex.aws-us-east-1.vtex.io/{{account}}/{{workspace}}/_v/vtex/private`
 
 ## Setting up my application
 
@@ -224,3 +224,62 @@ request.Headers.Add("Proxy-Authorization", authToken);
 request.Headers.Add("X-Vtex-Use-Https", "true");
 ```
 
+## GraphQL
+
+This repository includes some GraphQL samples that you can use as base for your own project.
+
+There are 2 approaches for writting GraphQL applications.
+
+### Schema first
+1. Define the `schema.graphql` file in the `graphql` folder.
+2. Create your *query* class and decorate it with `[GraphQLMetadata("Query")]`.
+3. Implement your resolvers following the [Schema First](https://graphql-dotnet.github.io/docs/getting-started/arguments#schema-first) syntax and decorate them with the same names you gave to your fields in the schema. Ex: `[GraphQLMetadata("books")]` for the `books` resolver.
+4. Create your *mutation* class and decorate it with `[GraphQLMetadata("Mutation")]`.
+5. Implement your resolvers the same way you did in step 3.
+
+Example:
+```C#
+[GraphQLMetadata("Query")]
+public class Query
+{
+    private readonly IBooksDataSource booksDataSource;
+    public Query(IBooksDataSource booksDataSource)
+    {
+        this.booksDataSource = booksDataSource;
+    }
+
+    [GraphQLMetadata("books")]
+    public IEnumerable<Book> GetBooks()
+    {
+        return booksDataSource.GetBooks();
+    }
+}
+```
+
+### Code first
+1. Define the `schema.graphql` file in the `graphql` folder (this step should be automatic in the future).
+2. Create your *query* class and decorate it with `[GraphQLMetadata("Query")]`.
+3. Implement your resolvers following the [Code First](https://graphql-dotnet.github.io/docs/getting-started/arguments#graphtype-first) syntax. Make sure you use the same names you gave to your fields in the schema.
+4. Create your *mutation* class and decorate it with `[GraphQLMetadata("Mutation")]`.
+5. Implement your resolvers the same way you did in step 3.
+
+Example:
+```C#
+[GraphQLMetadata("Query")]
+public class Query : ObjectGraphType<object>
+{
+    public Query(IBooksDataSource booksDataSource)
+    {
+        Name = "Query";
+
+        Field<ListGraphType<BookType>>(
+            "books",
+            resolve: context => booksDataSource.GetBooks()
+        );
+    }
+}
+```
+
+**Tip:** You can only have one class for operation type (Query, Mutation or Subscription). If you want to separate your code by entity or responsibility you can do it with `partial` classes.
+
+**Tip:** If you need to access the `HttpContext` in your resolvers you can inject the `IHttpContextAccessor` in your class constructor.
