@@ -10,9 +10,10 @@
     "smartcheckout"
   ],
   "builders": {
-    "dotnet": "0.x"
+    "dotnet": "1.x"
   },
   "scripts": {
     "postreleasy": "vtex publish"
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
