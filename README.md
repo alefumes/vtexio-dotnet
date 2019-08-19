@@ -280,8 +280,8 @@ public class Query : ObjectGraphType<object>
 
 ## Migrating from .Net 2.0 to .Net 2.2
 In order to migrate your app from .Net 2.0 to .Net 2.2 you need to do the following:
-1. Open your `manifest.json` file and change your "dotnet" builder from "0.x" to "1.x".
-2. Open your project file (`*.csproj`) and change the `TargetFramework` from "netcoreapp2.0" to "netcoreapp2.2"
+1. Open your `manifest.json` file and change your **dotnet** builder from **0.x** to **1.x**.
+2. Open your project file (`*.csproj`) and change the `TargetFramework` from **netcoreapp2.0** to **netcoreapp2.2**.
 3. In your project file you also need to remove the reference to `Microsoft.AspNetCore.All` and add one for `Microsoft.AspNetCore.App`.
 
 Your `manifest.json` file should look like this:
