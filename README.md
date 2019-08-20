@@ -13,13 +13,7 @@ $ npm i -g vtex
 $ vtex login
 ```
 
-Secondly, install the **NPM Cache** to be able to use external dependencies (from **NuGet**).
-
-```bash
-$ vtex infra install npm-cache
-```
-
-Download this repo and open a terminal in the `rest-api` folder.
+Now, download this repo and open a terminal in the `rest-api` folder.
 
 To start coding you need a workspace (it's like a `git` branch of your store). Let's create a workspace named `dev`:
 
@@ -283,3 +277,35 @@ public class Query : ObjectGraphType<object>
 **Tip:** You can only have one class for operation type (Query, Mutation or Subscription). If you want to separate your code by entity or responsibility you can do it with `partial` classes.
 
 **Tip:** If you need to access the `HttpContext` in your resolvers you can inject the `IHttpContextAccessor` in your class constructor.
+
+## Migrating from .Net 2.0 to .Net 2.2
+In order to migrate your app from .Net 2.0 to .Net 2.2 you need to do the following:
+1. Open your `manifest.json` file and change your **dotnet** builder from **0.x** to **1.x**.
+2. Open your project file (`*.csproj`) and change the `TargetFramework` from **netcoreapp2.0** to **netcoreapp2.2**.
+3. In your project file you also need to remove the reference to `Microsoft.AspNetCore.All` and add one for `Microsoft.AspNetCore.App`.
+
+Your `manifest.json` file should look like this:
+
+```
+"builders": {
+  "dotnet": "1.x",
+  "graphql": "1.x"
+},
+```
+
+And your project file should look like this:
+
+```
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="GraphQL" Version="2.4.0" />
+  </ItemGroup>
+
+</Project>
+```
