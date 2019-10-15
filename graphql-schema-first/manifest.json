@@ -1,14 +1,12 @@
 {
-  "name": "graphql-schema-first",
-  "vendor": "vtex",
-  "version": "0.1.0",
+  "name": "app-test",
+  "vendor": "gocommerce",
+  "version": "0.0.1",
   "title": "Getting Started with .Net",
   "description": "A hello world app using VTEX IO .Net Runtime",
   "categories": [],
   "settingsSchema": {},
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "builders": {
     "graphql": "1.x",
     "dotnet": "1.x"

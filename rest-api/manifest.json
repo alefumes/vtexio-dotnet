@@ -1,19 +1,33 @@
 {
   "name": "dotnet-rest-api",
-  "vendor": "vtex",
+  "vendor": "gocommerce",
   "version": "0.1.0",
   "title": "Getting Started with .Net",
   "description": "A hello world app using VTEX IO .Net Runtime",
   "categories": [],
   "settingsSchema": {},
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "builders": {
     "dotnet": "1.x"
   },
   "scripts": {
     "postreleasy": "vtex publish"
   },
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "rnb.vtexcommercestable.com.br",
+        "path": "/api/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "splunk-heavyforwarder-public.vtex.com",
+        "path": "*"
+      }
+    }
+  ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

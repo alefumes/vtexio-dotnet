@@ -5,31 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace service.Controllers
 {
-    public class RoutesController : Controller
-    {
-        public string PrintHelloWorld()
-        {
-            return "Hello, IO!";
-        } 
+	public class RoutesController : Controller
+	{
+		public string PrintHelloWorld()
+		{
+			return "2222 Hello, IO!";
+		}
 
-        public string PrintHello(string name)
-        {
-            return $"Hello, {name}!";
-        } 
-      
-        public string PrintPrivateValue(string account, string workspace) 
-        {
-            return $"My private value! Account: {account} | Workspace: {workspace}";
-        }
+		public string PrintHello(string name)
+		{
+			return $"Hello, {name}!";
+		}
 
-        public string ApiDefault()
-        {
-            return "This is the default API response";
-        }
+		public string PrintPrivateValue(string account, string workspace)
+		{
+			return $"My private value! Account: {account} | Workspace: {workspace}";
+		}
 
-        public string Default()
-        {
-            return "This is the default response";
-        }
-    }
+		public string ApiDefault()
+		{
+			return "This is the default API response";
+		}
+
+		public string Default()
+		{
+			return "This is the default response";
+		}
+	}
 }
